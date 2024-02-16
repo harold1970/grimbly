@@ -5,16 +5,16 @@ The interpreter is a program designed to read and execute instructions written i
 Key Components:
 
 Commands: The interpreter recognizes several commands, each with specific functionalities. These commands include:
-*        print: Print the value of a variable.
- *       add: Perform addition operation.
-  *      sub: Perform subtraction operation.
-   *     if: Conditional branching based on comparison.
-    *    while: Loop execution based on condition.
-     *   var: Placeholder for potential future variable handling.
-      *  /: Placeholder for potential future functionality.
-       * exit: Terminate the script execution.
-        *ld: Load a value into a variable.
-        *scan: Prompt the user for input.
+* print: Print the value of a variable.
+* add: Perform addition operation.
+* sub: Perform subtraction operation.
+* if: Conditional branching based on comparison.
+* while: Loop execution based on condition.
+* var: Placeholder for potential future variable handling.
+* Placeholder for potential future functionality.
+* exit: Terminate the script execution.
+* ld: Load a value into a variable.
+* scan: Prompt the user for input.
 
     Variables: The interpreter supports the use of variables to store and manipulate values. Variables include a, b, x, and j.
 
