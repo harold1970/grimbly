@@ -20,41 +20,41 @@ Commands: The interpreter recognizes several commands, each with specific functi
 
 Script Loading:
 
-    The interpreter loads the script from a JSON file specified as script.json.
-    Each instruction in the script file is represented as a JSON array element.
+*    The interpreter loads the script from a JSON file specified as script.json.
+*    Each instruction in the script file is represented as a JSON array element.
 
 Execution Flow:
 
-    The interpreter reads the script sequentially, executing each instruction one by one.
-    It parses each instruction, identifies the command and its arguments, and performs the corresponding action.
-    Execution continues until the end of the script is reached or until a termination command (exit) is encountered.
+*   The interpreter reads the script sequentially, executing each instruction one by one.
+*  It parses each instruction, identifies the command and its arguments, and performs the corresponding action.
+* Execution continues until the end of the script is reached or until a termination command (exit) is encountered.
 
 Error Handling:
 
-    The interpreter includes basic error handling to detect and report invalid instructions or unrecognized commands.
-    Error messages provide information about the line number and the nature of the error encountered during script execution.
+*    The interpreter includes basic error handling to detect and report invalid instructions or unrecognized commands.
+*    Error messages provide information about the line number and the nature of the error encountered during script execution.
 
 Example Script:
 
 json
 
-[
-    "ld|int|a|1",
-    "print|a",
-    "exit"
-]
+    [
+        "ld|int|a|1",
+        "print|a",
+        "exit"
+    ]
 
 Supported Commands:
 
-    print: Usage: print|variable. Prints the value of the specified variable to the output.
-    add: Usage: add. Performs addition operation.
-    sub: Usage: sub. Performs subtraction operation.
-    if: Usage: if|variable|comparison_operator|target_instruction. Conditional branching based on comparison.
-    while: Usage: while|limit|current_value|operation|target_instruction. Loop execution based on condition.
-    var, /, exit, ld, scan: Placeholder commands.
+*    print: Usage: print|variable. Prints the value of the specified variable to the output.
+*    add: Usage: add. Performs addition operation.
+*    sub: Usage: sub. Performs subtraction operation.
+*    if: Usage: if|variable|comparison_operator|target_instruction. Conditional branching based on comparison.
+*    while: Usage: while|limit|current_value|operation|target_instruction. Loop execution based on condition.
+*    var, /, exit, ld, scan: Placeholder commands.
 
 Future Enhancements:
 
-    Support for additional commands and functionalities.
-    Improved error handling and error reporting mechanisms.
-    Optimization of execution speed and resource usage.
+*   Support for additional commands and functionalities.
+*   Improved error handling and error reporting mechanisms.
+*   Optimization of execution speed and resource usage.
