@@ -1,5 +1,4 @@
-Certainly! Here's a documentation for your interpreter:
-Interpreter Documentation
+
 Overview:
 
 The interpreter is a program designed to read and execute instructions written in a custom scripting language. It loads a script from a JSON file, parses each instruction, and performs corresponding actions based on those instructions.
