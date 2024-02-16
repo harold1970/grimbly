@@ -1,5 +1,5 @@
 import json
-commands = ["print","add","sub","if","while","var","/","exit","ld","scan"]
+commands = ["print","add","sub","if","while","exit","ld","scan","/"]
 pc = 0
 a = int(0)
 b = int(0)
@@ -48,7 +48,9 @@ while True:
                 a = str(components[3])
             if components[2] == "b":
                 b = str(components[3])
-            if components[2] == "j" or "x":
+            if components[2] == "j":
+                print("value must be numarical")
+            if components[2] == "x":
                 print("value must be numarical")
 
     if components[0] == "add":
