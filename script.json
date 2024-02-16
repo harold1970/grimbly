@@ -1,0 +1,5 @@
+[
+	"ld|int|a|1",
+	"print|a",
+	"exit"
+]
