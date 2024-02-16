@@ -18,7 +18,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * scan: Prompt the user for input.
 
 # Variables: 
-    The interpreter supports the use of variables to store and manipulate values. Variables include a, b, x, and j.
+*   The interpreter supports the use of variables to store and manipulate values. Variables include a, b, x, and j.
 
 # Script Loading:
 
