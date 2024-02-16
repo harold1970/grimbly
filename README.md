@@ -1,5 +1,5 @@
 
-Overview:
+
 
 The interpreter is a program designed to read and execute instructions written in a custom scripting language. It loads a script from a JSON file, parses each instruction, and performs corresponding actions based on those instructions.
 Key Components:
@@ -51,8 +51,11 @@ Supported Commands:
 *    sub: Usage: sub. Performs subtraction operation.
 *    if: Usage: if|variable|comparison_operator|target_instruction. Conditional branching based on comparison.
 *    while: Usage: while|limit|current_value|operation|target_instruction. Loop execution based on condition.
-*    var, /, exit, ld, scan: Placeholder commands.
-
+*    var: Usage 
+*    exit: Usage
+*    ld: Usage: ld|type(*"char"* or *"int"* )|variable|value
+*    scan: Usage
+*    
 Future Enhancements:
 
 *   Support for additional commands and functionalities.
