@@ -41,7 +41,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 json
 
     [
-        "ld|int|a|1",
+        "ld|char|a|hello world",
         "print|a",
         "exit"
     ]
