@@ -1,5 +1,6 @@
 import json
-commands = ["print","add","sub","if","while","exit","ld","scan","/"]
+
+commands = ["print","add","sub","if","while","exit","ld","scan","/","mul","div"]
 pc = 0
 a = None
 b = None
@@ -39,32 +40,36 @@ while True:
     if components[0] == "ld":
         
         if components[1] == "int":
+            
             if components[2] == "a":
                 a = int(components[3])
-            if components[2] == "b":
+            elif components[2] == "b":
                 b = int(components[3])
-            if components[2] == "x":
+            elif components[2] == "x":
                 x = int(components[3])
-            if components[2] == "j":
+            elif components[2] == "j":
                 j = int(components[3])
             else:
-                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: '{components[1]}'")
-        if components[1] == "char":
+                print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
+                break
+        elif components[1] == "char":
             if components[2] == "a":
                 a = str(components[3])
-            if components[2] == "b":
+            elif components[2] == "b":
                 b = str(components[3])
-            if components[2] == "j":
+            
+            elif components[2] == "j":
                 print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
                 break
-            if components[2] == "x":
+            elif components[2] == "x":
                 print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
                 break
-        
+            
+            else:
+                print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
+                break 
         else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable type: '{components[1]}' ")
-            break
-    
+            print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
     if components[0] == "add":
        
         a = int(b) + int(a)
@@ -94,7 +99,7 @@ while True:
         if components[1] == "a":
             first = a
             second = b
-        if components[0] == "b":
+        if components[1] == "b":
             first = b
             second = a
         if components[2] == "==":
@@ -115,31 +120,51 @@ while True:
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {component[2]}")
             break
-    
+    # c1 = x c2 = j c3 = op c4 = jmp to
     if components[0] == "while":
-        x = int(components[1])
-        j = int(components[2])
+        if components[1] == "a":
+            x = a
+        if components[1] == "b":
+            x = b
+        else:    
+            x = int(components[1])
+            
+        if components[2] == "a":
+            j = a
+
+        if components[2] == "b":
+            j = b
+
+        else:
+            j = int(components[2])
+        
         while j < x:
             j = j + 1
+            
             if components[3] == "+":
                 a = a + 1
+            
             if components[3] == "-":
                 a = a - 1
-            if components[3] == "/":
-                pc = int(components[4]) 
+            
             else:
                 print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {componenet[3]}")
                 break
-    
+            
+            pc = int(components[4]) 
     if components[0] == "scan":
         if components[1] == "a":  
             a = input(components[2])
+        
         if componenets[1] == "b":
             b = input(components[2])
+        
         if componenets[1] == "j":
             j = int(input(componenets[2]))
+        
         if componenets[1] == "x":
             x = int(input(componenets[2]))
+        
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
             break
