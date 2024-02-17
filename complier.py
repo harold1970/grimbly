@@ -1,8 +1,8 @@
 import json
 commands = ["print","add","sub","if","while","exit","ld","scan","/"]
 pc = 0
-a = int(0)
-b = int(0)
+a = None
+b = None
 x = int(0)
 j = int(0)
 
@@ -13,7 +13,7 @@ while True:
     instruction = script[pc]
     components = instruction.split('|')
     if components[0] not in commands:
-        print(f"___ERROR___ line:{pc} instruction:{instruction}")
+        print(f"___ERROR___ line:{pc} instruction:{instruction} invaled command")
         break
     if components[0] == int:
         print(components[0])
@@ -21,10 +21,15 @@ while True:
     if components[0] == "print":
         # print comp 1
         if components[1] == "a":
-            print(a)
+            if a == None:
+                print(f"a: Null")
+            else:
+                print(f"a: {a}")
         elif components[1] == "b":
-            print(b)
-    
+            if b == None:
+                print("b: Null")
+            else:
+                print(f"b: {b}")
         else:
             print(component[1])
 
@@ -42,27 +47,49 @@ while True:
                 x = int(components[3])
             if components[2] == "j":
                 j = int(components[3])
-        
+            else:
+                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: '{components[1]}'")
         if components[1] == "char":
             if components[2] == "a":
                 a = str(components[3])
             if components[2] == "b":
                 b = str(components[3])
             if components[2] == "j":
-                print("value must be numarical")
+                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
+                break
             if components[2] == "x":
-                print("value must be numarical")
-
-    if components[0] == "add":
-        a = int(b) + int(a)
-    if components[0] == "sub":
-        if components[1] == "a":
-            a = b - a
-        if components == "b":
-            b = a - b
+                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
+                break
+        
         else:
-            print("varible not found")
-            
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable type: '{components[1]}' ")
+            break
+    
+    if components[0] == "add":
+       
+        a = int(b) + int(a)
+    
+    if components[0] == "mul":
+        a = int(b) * int(a)
+
+    if components[0] == "div":
+        if components[1] == "a":
+            b = b % a
+        if components[1] == "b":
+            a = a % b
+        else:
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[1]}")
+
+    if components[0] == "sub":
+        
+        if components[1] == "a":
+            b = b - a
+        elif components == "b":
+            a = a - b
+        else:
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {instruction[1]}")
+            break
+    
     if components[0] == "if":
         if components[1] == "a":
             first = a
@@ -73,19 +100,22 @@ while True:
         if components[2] == "==":
             if first == second:
                 pc == components[3] - 1
-        if components[2] == "<<":
+        elif components[2] == "<<":
             if first < second:
                 pc == components[3] - 1
-        if components[2] == ">>":
+        elif components[2] == ">>":
             if first > second:
                 pc == components[3] - 1
-        if components[2] == "<=":
+        elif components[2] == "<=":
             if first <= second:
                 pc == components[3] - 1
-        if components[2] == ">=":
+        elif components[2] == ">=":
            if first >= second:
                 pc == components[3] - 1
-        
+        else:
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {component[2]}")
+            break
+    
     if components[0] == "while":
         x = int(components[1])
         j = int(components[2])
@@ -94,12 +124,24 @@ while True:
             if components[3] == "+":
                 a = a + 1
             if components[3] == "-":
-                a -= 1
+                a = a - 1
             if components[3] == "/":
                 pc = int(components[4]) 
-
+            else:
+                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {componenet[3]}")
+                break
+    
     if components[0] == "scan":
-        a = input(components[1])
+        if components[1] == "a":  
+            a = input(components[2])
+        if componenets[1] == "b":
+            b = input(components[2])
+        if componenets[1] == "j":
+            j = int(input(componenets[2]))
+        if componenets[1] == "x":
+            x = int(input(componenets[2]))
+        else:
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
+    
 
-                
     pc = pc + 1
