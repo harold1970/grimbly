@@ -1,0 +1,15 @@
+[
+	
+	"print|a",
+	"ld|int|a|10",
+	"ld|int|b|5",
+	"for|0|10|+|5",	
+	"print|a",
+	"exit",
+	"div|b|a",
+	"print|a",
+	"ld|int|a|1",
+	"ld|int|b|100",
+	"if|a|<<|1",
+	"exit"
+]

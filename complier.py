@@ -7,7 +7,7 @@ b = None
 x = int(0)
 j = int(0)
 
-with open('script.json', 'r') as f:
+with open('script.grimbly', 'r') as f:
     script = json.load(f)
 while True:
     # print(a)
