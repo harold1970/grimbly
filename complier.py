@@ -71,26 +71,45 @@ while True:
         else:
             print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
     if components[0] == "add":
-       
-        a = int(b) + int(a)
+        if components[1] == "a":     
+            a = int(b) + int(a)
+        elif components[1] =="b":
+            b = int(b) + int(a)
     
     if components[0] == "mul":
-        a = int(b) * int(a)
+        if components[1] == "a":     
+            a = int(b) * int(a)
+        elif components[1] =="b":
+            b = int(b) * int(a)
+    
 
     if components[0] == "div":
         if components[1] == "a":
-            b = b % a
-        if components[1] == "b":
-            a = a % b
+            if components[2] == "b":    
+                b = b % a
+            elif components[2] == "a":
+                a = b % a
+        elif components == "b":
+            if components[2] == "a":
+                a = a % b
+            if components[2] == "b":
+                b = a % b
+
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[1]}")
 
     if components[0] == "sub":
-        
         if components[1] == "a":
-            b = b - a
+            if components[2] == "b":    
+                b = b - a
+            elif components[2] == "a":
+                a = b - a
         elif components == "b":
-            a = a - b
+            if components[2] == "a":
+                a = a - b
+            if components[2] == "b":
+                b = a - b
+        
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {instruction[1]}")
             break
