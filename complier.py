@@ -86,18 +86,18 @@ while True:
     if components[0] == "div":
         if components[1] == "a":
             if components[2] == "b":    
-                b = b % a
+                b = b / a
             elif components[2] == "a":
-                a = b % a
-        elif components == "b":
+                a = b / a
+        elif components[1] == "b":
             if components[2] == "a":
-                a = a % b
+                a = a / b
             if components[2] == "b":
-                b = a % b
+                b = a / b
 
         else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[1]}")
-
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {components[1]}")
+            break
     if components[0] == "sub":
         if components[1] == "a":
             if components[2] == "b":    
@@ -137,40 +137,44 @@ while True:
            if first >= second:
                 pc == components[3] - 1
         else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {component[2]}")
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
             break
     # c1 = x c2 = j c3 = op c4 = jmp to
-    if components[0] == "while":
+    if components[0] == "for":
+       # variables ############
         if components[1] == "a":
-            x = a
-        if components[1] == "b":
-            x = b
+            x = int(a)
+        elif components[1] == "b":
+            x = int(b)
+        ########################
+        # number
         else:    
             x = int(components[1])
-            
+        ########################## x    
         if components[2] == "a":
-            j = a
+            j = int(a)
 
-        if components[2] == "b":
-            j = b
+        elif components[2] == "b":
+            j = int(b)
 
-        else:
+        else: #j
             j = int(components[2])
         
-        while j < x:
-            j = j + 1
-            
+        while x <= (j):
+            print(f"loop j: {j} x: {x}")
             if components[3] == "+":
-                a = a + 1
+                x = x + 1
             
-            if components[3] == "-":
-                a = a - 1
-            
+            elif components[3] == "-":
+                x = x - 1
             else:
-                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {componenet[3]}")
-                break
-            
-            pc = int(components[4]) 
+                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
+                break 
+            if j != x:
+                pc = int(components[4]) 
+                 
+
+
     if components[0] == "scan":
         if components[1] == "a":  
             a = input(components[2])
