@@ -1,6 +1,6 @@
 import json
 
-commands = ["print","add","sub","if","while","exit","ld","scan","/","mul","div"]
+commands = ["print","add","sub","if","for","exit","ld","scan","/","mul","div"]
 pc = 0
 a = None
 b = None
@@ -118,25 +118,27 @@ while True:
         if components[1] == "a":
             first = a
             second = b
-        if components[1] == "b":
+        elif components[1] == "b":
             first = b
             second = a
+        
         if components[2] == "==":
             if first == second:
-                pc == components[3] - 1
+                pc = int(components[3])
         elif components[2] == "<<":
-            if first < second:
-                pc == components[3] - 1
+            if first < second:    
+                pc = int(components[3])
+                print("hello world")
         elif components[2] == ">>":
-            if first > second:
-                pc == components[3] - 1
+            if first > second:    
+                pc = int(components[3])
         elif components[2] == "<=":
-            if first <= second:
-                pc == components[3] - 1
+            if first <= second:   
+                pc = int(components[3]) 
         elif components[2] == ">=":
-           if first >= second:
-                pc == components[3] - 1
-        else:
+           if first >= second:    
+                pc = int(components[3])
+        else:                     
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
             break
     # c1 = x c2 = j c3 = op c4 = jmp to
