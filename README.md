@@ -10,7 +10,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * add: Perform addition operation.
 * sub: Perform subtraction operation.
 * if: Conditional branching based on comparison.
-* while: Loop execution based on condition.
+* for: Loop execution based on condition.
 * var: Placeholder for potential future variable handling.
 * Placeholder for potential future functionality.
 * exit: Terminate the script execution.
