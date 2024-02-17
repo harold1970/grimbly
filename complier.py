@@ -22,14 +22,14 @@ while True:
         # print comp 1
         if components[1] == "a":
             if a == None:
-                print(f"a: Null")
+                print(f"Null")
             else:
-                print(f"a: {a}")
+                print(f"{a}")
         elif components[1] == "b":
             if b == None:
-                print("b: Null")
+                print("Null")
             else:
-                print(f"b: {b}")
+                print(f"{b}")
         else:
             print(component[1])
 
@@ -142,6 +142,7 @@ while True:
             x = int(input(componenets[2]))
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
+            break
     
-
+    
     pc = pc + 1
