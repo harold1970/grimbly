@@ -52,7 +52,7 @@ json
 *    add: Usage: add. Performs addition operation.
 *    sub: Usage: sub. Performs subtraction operation.
 *    if: Usage: if|*variable*|*comparison_operator*|*target_instruction*. Conditional branching based on comparison.
-*    while: Usage: while|*limit*|*current_value*|*operation*|*target_instruction*. Loop execution based on condition.
+*    while: Usage: while|*limit*|*current_value*|*operation*|*target_instruction*. Loop execution based on condition. (deprecated)
 *    exit: Usage: exit
 *    ld: Usage: ld|*type(*"char"* or *"int"* )*|*variable*|*value*
 *    scan: Usage: scan|*prompt_message*
