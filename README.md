@@ -48,15 +48,15 @@ json
 
 # Supported Commands:
 
-*    print: Usage: print|variable. Prints the value of the specified variable to the output.
+*    print: Usage: print|*variable* or *int* or *char*. Prints the value of the specified variable to the output.
 *    add: Usage: add. Performs addition operation.
 *    sub: Usage: sub. Performs subtraction operation.
-*    if: Usage: if|variable|comparison_operator|target_instruction. Conditional branching based on comparison.
-*    while: Usage: while|limit|current_value|operation|target_instruction. Loop execution based on condition.
+*    if: Usage: if|*variable*|*comparison_operator*|*target_instruction*. Conditional branching based on comparison.
+*    while: Usage: while|*limit*|*current_value*|*operation*|*target_instruction*. Loop execution based on condition.
 *    exit: Usage: exit
-*    ld: Usage: ld|type(*"char"* or *"int"* )|variable|value
-*    scan: Usage: scan|prompt_message
-*    
+*    ld: Usage: ld|*type(*"char"* or *"int"* )*|*variable*|*value*
+*    scan: Usage: scan|*prompt_message*
+*    /: Usage: /|*comment*  
 # Future Enhancements:
 
 *   Support for additional commands and functionalities.
