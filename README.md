@@ -1,7 +1,7 @@
 
 
 
-The interpreter is a program designed to read and execute instructions written in a custom scripting language. It loads a script from a JSON file, parses each instruction, and performs corresponding actions based on those instructions.
+The Grimbly interpreter is a program designed to read and execute instructions written in a custom scripting language. It loads a script from a grimbly (renamed json file) file, parses each instruction, and performs corresponding actions based on those instructions.
 Key Components:
 
 # Commands: 
