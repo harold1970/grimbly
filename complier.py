@@ -1,5 +1,5 @@
 import json
-
+import sys
 commands = ["print","add","sub","if","for","exit","ld","scan","/","mul","div"]
 pc = 0
 a = None
@@ -7,8 +7,19 @@ b = None
 x = int(0)
 j = int(0)
 
-with open('script.grimbly', 'r') as f:
-    script = json.load(f)
+if len(sys.argv) != 2:
+    print("Usage: python3 compiler.py <filename>")
+    sys.exit(1)
+
+filename = sys.argv[1]
+
+try:
+    with open(filename, 'r') as f:
+        script = json.load(f)
+except FileNotFoundError:
+    print(f"File '{filename}' not found.")
+    sys.exit(1)
+
 while True:
     # print(a)
     instruction = script[pc]
