@@ -46,6 +46,12 @@ json
         "exit"
     ]
 
+# Running
+run the compiler in the command line like so
+```
+python3 complier.py *your script here*
+```
+
 # Supported Commands:
 
 *    print: Usage: print|*variable* or *int* or *char*. Prints the value of the specified variable to the output.
