@@ -1,6 +1,6 @@
 import json
 import sys
-commands = ["print","add","sub","if","for","exit","ld","scan","/","mul","div"]
+commands = ["print","add","sub","if","for","exit","ld","scan","/","mul","div","ifexit"]
 pc = 0
 a = None
 b = None
@@ -205,5 +205,33 @@ while True:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
             break
     
+    if components[0] == "ifex":
+        if components[1] == "a":
+            first = a
+            second = b
+        elif components[1] == "b":
+            first = b
+            second = a
+        
+        if components[2] == "==":
+            if first == second:
+                break
+        elif components[2] == "<<":
+            if first < second:    
+                break
+                print("hello world")
+        elif components[2] == ">>":
+            if first > second:    
+                break
+           
+        elif components[2] == "<=":
+            if first <= second:   
+                break
+        elif components[2] == ">=":
+           if first >= second:    
+                break
+        else:                     
+            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
+            break
     
     pc = pc + 1
