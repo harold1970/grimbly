@@ -1,7 +1,7 @@
 
 
 
-The Grimbly interpreter is a program designed to read and execute instructions written in a custom scripting language. It loads a script from a grimbly (renamed json file) file, parses each instruction, and performs corresponding actions based on those instructions.
+The Grimbly interpreter is a program designed to read and execute instructions written in a custom scripting language called grimbly. It loads a script from a grimbly file, parses each instruction, and performs corresponding actions based on those instructions.
 Key Components:
 
 # Commands: 
@@ -56,6 +56,19 @@ The interpreter recognizes several commands, each with specific functionalities.
 *    ld: Usage: ld|*type(*"char"* or *"int"* )*|*variable*|*value*
 *    scan: Usage: scan|*prompt_message*
 *    /: Usage: /|*comment*  
+# Compiling
+in the code editor there is a button 'compile' if you press that the text in the top will be compiled into a .grimbly script, when you save it will save the compiled code. 
+### Example
+```
+ld|int|a|10
+ld|char|b|hello world
+print|b
+```
+it will turn into
+```
+["ld|int|a|10", "ld|char|b|hello world", "print|b"]
+```
+and then you can save it.
 # Future Enhancements:
 
 *   Support for additional commands and functionalities.
