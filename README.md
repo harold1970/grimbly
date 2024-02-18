@@ -37,8 +37,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 *    Error messages provide information about the line number and the nature of the error encountered during script execution.
 
 # Example Script:
-
-json
+.grimbly script
 
     [
         "ld|char|a|hello world",
