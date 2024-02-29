@@ -1,6 +1,6 @@
 import json
 import sys
-commands = ["print","add","sub","if","for","exit","ld","scan","/","mul","div","ifexit","jmp"]
+commands = {"print","add","sub","if","for","exit","ld","scan","/","mul","div","ifexit","jmp"}
 pc = 0
 a = None
 b = None
@@ -29,7 +29,8 @@ while True:
         break
     if components[0] == int:
         print(components[0])
-            
+     
+     # print command   
     if components[0] == "print":
         # print comp 1
         if components[1] == "a":
@@ -44,10 +45,12 @@ while True:
                 print(f"{b}")
         else:
             print(component[1])
-
+	
+	# exit command
     if components[0] == "exit":
         break
 
+    # load command		
     if components[0] == "ld":
         
         if components[1] == "int":
@@ -87,23 +90,24 @@ while True:
                 break
             
             else:
-                print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
+                print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
                 break 
         else:
-            print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
+            print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
+    # add command
     if components[0] == "add":
         if components[1] == "a":     
             a = int(b) + int(a)
         if components[1] =="b":
             b = int(b) + int(a)
-            
+	# mul command            
     if components[0] == "mul":
         if components[1] == "a":     
             a = int(b) * int(a)
         elif components[1] =="b":
             b = int(b) * int(a)
             
-            
+       # div command     
     if components[0] == "div":
         if components[1] == "a":
             if components[2] == "b":    
@@ -119,6 +123,7 @@ while True:
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {components[1]}")
             break
+    #sub command
     if components[0] == "sub":
         if components[1] == "a":
             if components[2] == "b":    
@@ -134,7 +139,7 @@ while True:
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {instruction[1]}")
             break
-            
+       # if command     
     if components[0] == "if":
         if components[1] == "a":
             first = a
@@ -167,13 +172,13 @@ while True:
         else:                     
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
             break
-    
+    # jmp command
     if components[0] == 'jmp':
         
         if components[1] == 'a':
             first = a
-        elif components[1] == 'b':
-            first = b
+        if components[1] == 'b':
+        	first = b
         
         if components[3] == 'a':
             second = a
@@ -192,16 +197,15 @@ while True:
         elif components[2] == '!':
             if first != second:
                 pc = components[4]
-	elif components[2] == '<=':
+        elif components[2] == '<=':
             if first <= second:
                 pc = components[4]
         elif components[2] == '>=':
             if first >= second:    
                 pc = components[4]
 
-            if first != second:
-                pc = components[4]
     # c1 = x c2 = j c3 = op c4 = jmp to
+    # for command
     if components[0] == "for":
        # variables ############
         if components[1] == "a":
@@ -236,7 +240,7 @@ while True:
                 pc = int(components[4]) 
                  
 
-
+	# scan command
     if components[0] == "scan":
         if components[1] == "a":  
             a = input(components[2])
@@ -253,7 +257,7 @@ while True:
         else:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
             break
-    
+    # if exit command
     if components[0] == "ifexit":
         if components[1] == "a":
             first = a
@@ -268,7 +272,7 @@ while True:
         elif components[2] == "<<":
             if first < second:    
                 break
-                print("hello world")
+
         elif components[2] == ">>":
             if first > second:    
                 break
@@ -283,5 +287,14 @@ while True:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]} \n")
             break
           
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     pc = int(pc) + 1
