@@ -1,6 +1,19 @@
 import json
 import sys
-commands = {"print","add","sub","if","for","exit","ld","scan","/","mul","div","ifexit","jmp"}
+commands = {
+"print": "False",
+"add": "False",
+"sub": "False",
+"if": "True", 
+"for":"True", 
+"exit": "False", 
+"ld": "False" ,
+"scan": "False",
+"/": "False",
+"mul":"False",
+"div":"False",
+"ifexit":"False",
+"jmp":"False"}
 pc = 0
 a = None
 b = None
@@ -21,12 +34,15 @@ except FileNotFoundError:
     sys.exit(1)
 
 while True:
-
+	
     instruction = script[pc]
     components = instruction.split('|')
     if components[0] not in commands:
         print(f"___ERROR___ line:{pc} instruction:{instruction} invaled command")
         break
+    if "True" in commands.values():
+    	print(f"___WARNING___ line: {pc} instruction: '{instruction}' depricated command")
+    	
     if components[0] == int:
         print(components[0])
      
@@ -287,14 +303,6 @@ while True:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]} \n")
             break
           
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
     pc = int(pc) + 1
