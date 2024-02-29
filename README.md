@@ -16,6 +16,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * exit: Terminate the script execution.
 * ld: Load a value into a variable.
 * scan: Prompt the user for input.
+* jmp: Conditional branching based on comparison.
 
 # Variables: 
 *   The interpreter supports the use of variables to store and manipulate values. Variables include a, b, x, and j.
@@ -58,6 +59,9 @@ The interpreter recognizes several commands, each with specific functionalities.
 *    /: Usage: /|*comment*  
 # Compiling
 in the code editor there is a button 'compile' if you press that the text in the top will be compiled into a .grimbly script, when you save it will save the compiled code. 
+# Decompiling
+in the code editor there is a button 'decompile' if you press that the text in the top will be decompiled into more human readable script, when you save it will still save the compiled code. 
+
 ### Example
 ```
 ld|int|a|10
