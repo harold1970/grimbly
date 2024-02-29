@@ -23,9 +23,13 @@ The interpreter recognizes several commands, each with specific functionalities.
 
 # Script Loading:
 
-*    The interpreter loads the script from a JSON file specified as script.json.
-*    Each instruction in the script file is represented as a JSON array element.
+*    The interpreter loads the script from a .grimbly file specified as script.
+*    Each instruction in the script file is represented as a .grimbly array element.
 
+
+     
+    python3 complier.py *script*.grimbly or .json
+    
 # Execution Flow:
 
 *   The interpreter reads the script sequentially, executing each instruction one by one.
