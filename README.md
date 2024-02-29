@@ -73,5 +73,4 @@ and then you can save it.
 
 *   Support for additional commands and functionalities.
 *   Improved error handling and error reporting mechanisms.
-*   Optimization of execution speed
-*   adding the ability to *if then exit*
+
