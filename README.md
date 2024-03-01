@@ -9,7 +9,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * print: Print the value of a variable.
 * add: Perform addition operation.
 * sub: Perform subtraction operation.
-* if: Conditional branching based on comparison.
+* if: Conditional branching based on comparison. (depricated)
 * for: Loop execution based on condition. (depricated)
 * var: Placeholder for potential future variable handling.
 * Placeholder for potential future functionality.
