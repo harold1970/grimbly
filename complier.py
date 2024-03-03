@@ -112,10 +112,34 @@ while True:
             print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
     # add command
     if components[0] == "add":
-        if components[1] == "a":     
-            a = int(b) + int(a)
+	
+	
+	if components[1] == "a":     
+            first = a
         if components[1] =="b":
-            b = int(b) + int(a)
+            first = b
+	if components[1] == "j":     
+            first = a
+        if components[1] =="x":
+            first = b		
+	
+	if components[2] == "a":     
+            second = a
+        if components[2] =="b":
+            second = b
+	if components[2] == "j":     
+            second = a
+        if components[2] =="x":
+            second = b	
+	
+	if components[2] == "a":     
+            a = first + second
+        if components[2] =="b":
+            b = first + second
+	if components[2] == "j":     
+	    j = first + second
+        if components[2] =="x":
+            x = first + second	
 	# mul command            
     if components[0] == "mul":
         if components[1] == "a":     
