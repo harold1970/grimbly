@@ -132,13 +132,13 @@ while True:
         if components[2] =="x":
             second = b	
 	
-	if components[2] == "a":     
+	if components[3] == "a":     
             a = first + second
-        if components[2] =="b":
+        if components[3] =="b":
             b = first + second
-	if components[2] == "j":     
+	if components[3] == "j":     
 	    j = first + second
-        if components[2] =="x":
+        if components[3] =="x":
             x = first + second	
 	# mul command            
     if components[0] == "mul":
