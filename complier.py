@@ -1,25 +1,58 @@
 import json
 import sys
+import os
+class UserVar:
+    def __init__(self, name, val=None, target=None):
+        self.Type = target
+        self.Name = name
+        if target == int:
+            self._value = int(val)
+        else:
+            self._value = str(val)
+    @property
+    def Value(self):
+        return self._value
+    @Value.setter
+    def Value(self, val):
+        self._value = self.Type(val)
+    
+    def __repr__(self):
+        return self.Value
+    def __add__(self, rhs):
+        if self.Type is not rhs.Type:
+            raise Exception("Can't add different types")
+        if self.Type is int:
+            return self.Value + rhs.Value
+        if self.Type is str:
+            raise f"{self.Value} + {rhs.Value}"
+   
 commands = {
-"print": "False",
-"add": "False",
-"sub": "False",
-"if": "True", 
-"for":"True", 
-"exit": "False", 
-"ld": "False" ,
-"scan": "False",
-"/": "False",
-"mul":"False",
-"div":"False",
-"ifexit":"False",
-"jmp":"False"}
+"print": False,
+"add": False,
+"sub": False,
+"if": True, 
+"for": True, 
+"exit": False, 
+"ld": False ,
+"scan": False,
+"/": False,
+"mul": False,
+"div": False,
+"ifexit": False,
+"jmp": False,
+"import": False,
+"while": True
+			}
 pc = 0
 a = None
 b = None
 x = int(0)
 j = int(0)
+userVars = {}
 
+store = None
+first = None
+second = None
 if len(sys.argv) != 2:
     print("Usage: python3 compiler.py <filename>")
     sys.exit(1)
@@ -33,114 +66,56 @@ except FileNotFoundError:
     print(f"File '{filename}' not found.")
     sys.exit(1)
 
-while True:
-	
+if "exit" not in script:
+    print("___ERROR___ no exit command")
+    exit
+while True:     
+          
     instruction = script[pc]
     components = instruction.split('|')
     if components[0] not in commands:
         print(f"___ERROR___ line:{pc} instruction:{instruction} invaled command")
         break
-    if "True" in commands.values():
-    	print(f"___WARNING___ line: {pc} instruction: '{instruction}' depricated command")
-    	
+   
     if components[0] == int:
         print(components[0])
      
      # print command   
     if components[0] == "print":
-        # print comp 1
-        if components[1] == "a":
-            if a == None:
-                print(f"Null")
-            else:
-                print(f"{a}")
-        elif components[1] == "b":
-            if b == None:
-                print("Null")
-            else:
-                print(f"{b}")
+        if components[1] not in userVars:
+            print(components[1])
         else:
-            print(component[1])
+            print(userVars[components[1]])
 	
-	# exit command
+    # exit command
     if components[0] == "exit":
         break
-
+            
+                
     # load command		
     if components[0] == "ld":
-        
-        if components[1] == "int":
-            
-            if components[2] == "a":
-                if components[3] == 'b':
-                    a = b
-                else:
-                    a = components[3]
-            
-            elif components[2] == "b":
-                if components[3] == 'a':
-                    b = a
-                else:
-                    b = components[3]
-
-            elif components[2] == "x":
-                x = int(components[3])
-            
-            elif components[2] == "j":
-                j = int(components[3])
                 
+        if components[1] == "int":
+            if components[2] not in userVars:
+                userVars[components[2]] = UserVar(components[2],components[3], int)
             else:
-                print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
-                break
+                userVars[components[2]] = UserVar(components[2],components[3], int)  
+
         elif components[1] == "char":
-            if components[2] == "a":
-                a = str(components[3])
-            elif components[2] == "b":
-                b = str(components[3])
-            
-            elif components[2] == "j":
-                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
-                break
-            elif components[2] == "x":
-                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
-                break
-            
+            if components[2] not in userVars:
+                userVars[components[2]] = UserVar(components[2],components[3], str)  
             else:
-                print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
-                break 
-        else:
-            print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
+                userVars[components[2]] = UserVar(components[2],components[3], str)  
     # add command
     if components[0] == "add":
-	
-	
-	if components[1] == "a":     
-            first = a
-        if components[1] =="b":
-            first = b
-	if components[1] == "j":     
-            first = a
-        if components[1] =="x":
-            first = b		
-	
-	if components[2] == "a":     
-            second = a
-        if components[2] =="b":
-            second = b
-	if components[2] == "j":     
-            second = a
-        if components[2] =="x":
-            second = b	
-	
-	if components[3] == "a":     
-            a = first + second
-        if components[3] =="b":
-            b = first + second
-	if components[3] == "j":     
-	    j = first + second
-        if components[3] =="x":
-            x = first + second	
-	# mul command            
+        right = userVars[components[2]]
+        left = userVars[components[3]]
+        store = left + right
+        userVars[components[1]] = store
+        
+
+
+    # mul command            
     if components[0] == "mul":
         if components[1] == "a":     
             a = int(b) * int(a)
@@ -194,7 +169,7 @@ while True:
             second = h
 
         if components[2] == "==":
-            if first == second:
+             if first == second:
                 pc = int(components[3])
         elif components[2] == "<<":
             if first < second:    
@@ -327,6 +302,6 @@ while True:
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]} \n")
             break
           
-   
     
+              
     pc = int(pc) + 1
