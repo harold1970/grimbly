@@ -9,9 +9,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * print: Print the value of a variable.
 * add: Perform addition operation.
 * sub: Perform subtraction operation.
-* if: Conditional branching based on comparison. (depricated)
-* for: Loop execution based on condition. (depricated)
-* var: Placeholder for potential future variable handling.
+* if: Conditional branching based on comparison.
 * Placeholder for potential future functionality.
 * exit: Terminate the script execution.
 * ld: Load a value into a variable.
@@ -19,7 +17,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * jmp: Conditional branching based on comparison.
 
 # Variables: 
-*   The interpreter supports the use of variables to store and manipulate values. Variables include a, b, x, and j.
+*   The interpreter supports the use of variables to store and manipulate values. users can create variables with the *'ld'* command
 
 # Script Loading:
 
@@ -55,11 +53,10 @@ The interpreter recognizes several commands, each with specific functionalities.
 *    print: Usage: print|*variable* or *int* or *char*. Prints the value of the specified variable to the output.
 *    add: Usage: add. Performs addition operation.
 *    sub: Usage: sub. Performs subtraction operation.
-*    if: Usage: if|*variable*|*comparison_operator*|*target_instruction*. Conditional branching based on comparison.
-*    while: Usage: while|*limit*|*current_value*|*operation*|*target_instruction*. Loop execution based on condition. (deprecated)
+*    if: Usage: if|*variable*|*comparison_operator*|*variable*|*target_instruction*. Conditional branching based on comparison.
 *    exit: Usage: exit
 *    ld: Usage: ld|*type(*"char"* or *"int"* )*|*variable*|*value*
-*    scan: Usage: scan|*prompt_message*
+*    scan: Usage: scan|*type*|*varible to store in*|*prompt_message*
 *    /: Usage: /|*comment*  
 # Compiling
 in the code editor there is a button 'compile' if you press that the text in the top will be compiled into a .grimbly script, when you save it will save the compiled code. 
@@ -78,7 +75,6 @@ it will turn into
 ```
 and then you can save it.
 # Future Enhancements:
-
-*   Support for additional commands and functionalities.
-*   Improved error handling and error reporting mechanisms.
+* adding user functions
+* better syntax
 
