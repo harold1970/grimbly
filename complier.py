@@ -1,30 +1,86 @@
 import json
 import sys
+import os
+
+
+
+class UserVar:
+    def __init__(self, name, val=None, target=None):
+        self.Type = target
+        self.Name = name
+        if target == int:
+            self._value = int(val)
+        else:
+            self._value = str(val)
+    @property
+    def Value(self):
+        return self._value
+    @Value.setter
+    def Value(self, val):
+        self._value = self.Type(val)
+    def __str__(self):
+        self._value = str(self._value)
+        return self.Value
+    def __repr__(self):
+        self._value = int(self._value)
+        return self.Value
+    def __add__(self, rhs):
+       if self.Type is int:
+           return int(self.Value) + int(rhs.Value)
+       if self.Type is str:
+           raise f"{self.Value} + {rhs.Value}"
+
+class UserFunction:
+    def __init__(self, name, startPc, endPc, _return):
+        self.StartPc = startPc
+        self.Name = name
+        self.EndPc = endPc
+        self.ReturnTo = _return
+
+
 commands = {
-"print": "False",
-"add": "False",
-"sub": "False",
-"if": "True", 
-"for":"True", 
-"exit": "False", 
-"ld": "False" ,
-"scan": "False",
-"/": "False",
-"mul":"False",
-"div":"False",
-"ifexit":"False",
-"jmp":"False"}
+"print": False,
+"add": False,
+"sub": False,
+"if": False, 
+"exit": False, 
+"ld": False,
+"scan": False,
+"/": False,
+"mul": False,
+"div": False,
+"ifexit":False,
+"import": False,
+"while": True,
+"function": False,
+"import": False,
+"mov": False
+}
 pc = 0
 a = None
 b = None
 x = int(0)
 j = int(0)
-
+lx = 0
+endPc = 0
+userVars = {}
+userFunctions = {}
+store = None
+first = None
+second = None
 if len(sys.argv) != 2:
     print("Usage: python3 compiler.py <filename>")
     sys.exit(1)
 
 filename = sys.argv[1]
+
+
+def custom_import(libraryname):
+    if library_name == "additional_functions":
+        print("Library imported successfully!")
+    else:
+        print("Library not found!")
+
 
 try:
     with open(filename, 'r') as f:
@@ -32,271 +88,128 @@ try:
 except FileNotFoundError:
     print(f"File '{filename}' not found.")
     sys.exit(1)
-
-while True:
-	
+if "exit" not in script:
+    print("___ERROR___ no exit command")
+ 
+while True:     
+    
+     
+    if pc == endPc:
+        pc = lx
+          
     instruction = script[pc]
     components = instruction.split('|')
-    if components[0] not in commands:
+    if components[0] not in commands and not userFunctions:
         print(f"___ERROR___ line:{pc} instruction:{instruction} invaled command")
         break
-    if "True" in commands.values():
-    	print(f"___WARNING___ line: {pc} instruction: '{instruction}' depricated command")
-    	
+   
     if components[0] == int:
         print(components[0])
-     
-     # print command   
+    
+
+
+    
+    # print command   
     if components[0] == "print":
-        # print comp 1
-        if components[1] == "a":
-            if a == None:
-                print(f"Null")
-            else:
-                print(f"{a}")
-        elif components[1] == "b":
-            if b == None:
-                print("Null")
-            else:
-                print(f"{b}")
+        if components[1] == "char":
+            print(components[2])
+        elif components[1] == "var":
+            print(userVars[components[2]])
         else:
-            print(component[1])
-	
-	# exit command
+            print(f"___ERROR___ line:{pc} instruction:{instruction} invaled component: {components[1]}")
+  # exit command
     if components[0] == "exit":
         break
-
+            
     # load command		
     if components[0] == "ld":
-        
-        if components[1] == "int":
-            
-            if components[2] == "a":
-                if components[3] == 'b':
-                    a = b
-                else:
-                    a = components[3]
-            
-            elif components[2] == "b":
-                if components[3] == 'a':
-                    b = a
-                else:
-                    b = components[3]
-
-            elif components[2] == "x":
-                x = int(components[3])
-            
-            elif components[2] == "j":
-                j = int(components[3])
                 
-            else:
-                print("___ERROR___ line: {pc} instruction: {instruction} | unknow variable: '{components[2]}'")
-                break
+        if components[1] == "int":
+            userVars[components[2]] = UserVar(components[2],components[3], int)  
+    
         elif components[1] == "char":
-            if components[2] == "a":
-                a = str(components[3])
-            elif components[2] == "b":
-                b = str(components[3])
-            
-            elif components[2] == "j":
-                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
-                break
-            elif components[2] == "x":
-                print("___ERROR___ line: {pc} instruction: {instruction} | value must be numarical: '{components[3]}'")
-                break
-            
-            else:
-                print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
-                break 
-        else:
-            print("___ERROR___ line: {pc} instruction: {instruction} | unknown variable: '{components[2]}'")
+            userVars[components[2]] = UserVar(components[2],components[3], str)  
+    
+    if components[0] == "mov":
+        if components[1] in userVars and components[2] in userVars:
+            userVars[components[1]] = userVars[components[2]]
+           
+        
+        
+        
     # add command
     if components[0] == "add":
-	
-	
-	if components[1] == "a":     
-            first = a
-        if components[1] =="b":
-            first = b
-	if components[1] == "j":     
-            first = a
-        if components[1] =="x":
-            first = b		
-	
-	if components[2] == "a":     
-            second = a
-        if components[2] =="b":
-            second = b
-	if components[2] == "j":     
-            second = a
-        if components[2] =="x":
-            second = b	
-	
-	if components[3] == "a":     
-            a = first + second
-        if components[3] =="b":
-            b = first + second
-	if components[3] == "j":     
-	    j = first + second
-        if components[3] =="x":
-            x = first + second	
-	# mul command            
-    if components[0] == "mul":
-        if components[1] == "a":     
-            a = int(b) * int(a)
-        elif components[1] =="b":
-            b = int(b) * int(a)
-            
-       # div command     
-    if components[0] == "div":
-        if components[1] == "a":
-            if components[2] == "b":    
-                b = b / a
-            elif components[2] == "a":
-                a = b / a
-        elif components[1] == "b":
-            if components[2] == "a":
-                a = a / b
-            if components[2] == "b":
-                b = a / b
-            
-        else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {components[1]}")
-            break
-    #sub command
-    if components[0] == "sub":
-        if components[1] == "a":
-            if components[2] == "b":    
-                b = b - a
-            elif components[2] == "a":
-                a = b - a
-        elif components == "b":
-            if components[2] == "a":
-                a = a - b
-            if components[2] == "b":
-                b = a - b
-            
-        else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {instruction[1]}")
-            break
-       # if command     
-    if components[0] == "if":
-        if components[1] == "a":
-            first = a
-            second = b
-        elif components[1] == "b":
-            first = b
-            second = a
-        elif components[1] == "g":
-            h = 1
-            g = 1
-            first = g
-            second = h
+        right = userVars[components[2]]
+        left = userVars[components[3]]
+        store = left + right
+        userVars[components[1]] = store
+        
 
-        if components[2] == "==":
+    if components[0] == "div":
+        right = userVars[components[1]]
+        left = userVars[components[3]]
+        store = left / right
+        userVars[components[1]] = store
+    
+    if components[0] == "sub":
+        right = userVars[components[2]]
+        left = userVars[components[3]]
+        store = left - right
+        userVars[components[1]] = store
+        # if command     
+    # 1 = type 2 = first 3 = function 4 = pc 5 = pc if false
+    if components[0] == "if":
+        if components[1] == "int":
+            if components[2] not in userVars:
+                first = int(components[2])
+            else:
+                first = userVars[components[2]]
+            if components[4] not in userVars:
+                second = int(components[4])
+            else:
+                second = userVars[components[4]]      
+        
+        if components[1] == "char":
+            if components[2] not in userVars:
+                first = str(components[2])
+            else:
+                first = userVars[components[2]]
+            if components[4] not in userVars:
+                second = str(components[4])
+            else:
+                second = userVars[components[4]]
+            
+        if components[3] == "==":
             if first == second:
-                pc = int(components[3])
-        elif components[2] == "<<":
+                pc = int(components[5])
+        elif components[3] == "<<":
             if first < second:    
-                pc = int(components[3])
-                print("hello world")
-        elif components[2] == ">>":
+                pc = int(components[5])
+        elif components[3] == ">>":
             if first > second:    
-                pc = int(components[3])
-        elif components[2] == "<=":
+                pc = int(components[5])
+        elif components[3] == "<=":
             if first <= second:   
-                pc = int(components[3]) 
-        elif components[2] == ">=":
-           if first >= second:    
-                pc = int(components[3])
+                pc = int(components[5]) 
+        elif components[3] == ">=":
+            if first >= second:    
+                pc = int(components[5])
+        elif components[3] == "!=":
+            if first != second:
+                pc = int(components[5])
         else:                     
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
             break
-    # jmp command
-    if components[0] == 'jmp':
-        
-        if components[1] == 'a':
-            first = a
-        if components[1] == 'b':
-        	first = b
-        
-        if components[3] == 'a':
-            second = a
-        elif components[3] == 'b':
-            second = b
-
-        if components[2] == '==':
-            if first == second:
-                pc = components[4]
-        elif components[2] == '<':
-            if first < second:
-                pc = components[4]
-        elif components[2] == '>':
-            if first > second:    
-                pc = components[4]
-        elif components[2] == '!':
-            if first != second:
-                pc = components[4]
-        elif components[2] == '<=':
-            if first <= second:
-                pc = components[4]
-        elif components[2] == '>=':
-            if first >= second:    
-                pc = components[4]
-
-    # c1 = x c2 = j c3 = op c4 = jmp to
-    # for command
-    if components[0] == "for":
-       # variables ############
-        if components[1] == "a":
-            x = int(a)
-        elif components[1] == "b":
-            x = int(b)
-        ########################
-        # number
-        else:    
-            x = int(components[1])
-        ########################## x    
-        if components[2] == "a":
-            j = int(a)
-
-        elif components[2] == "b":
-            j = int(b)
-
-        else: #j
-            j = int(components[2])
-        
-        while x <= (j):
-            print(f"loop j: {j} x: {x}")
-            if components[3] == "+":
-                x = x + 1
-            
-            elif components[3] == "-":
-                x = x - 1
-            else:
-                print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]}")
-                break 
-            if j != x:
-                pc = int(components[4]) 
-                 
 
 	# scan command
     if components[0] == "scan":
-        if components[1] == "a":  
-            a = input(components[2])
-        
-        if componenets[1] == "b":
-            b = input(components[2])
-        
-        if componenets[1] == "j":
-            j = int(input(componenets[2]))
-        
-        if componenets[1] == "x":
-            x = int(input(componenets[2]))
-        
+        if components[1] == "int": 
+            userVars[components[2]] = UserVar(components[2], input(components[3]), int)  
+        if components[1] == "char":
+            userVars[components[2]] = UserVar(components[2], input(components[3]), str)
         else:
-            print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled variable: {componenets[2]}")
-            break
+            print(f"___ERROR___ unkown type {components[1]}, line: {pc}")
+
     # if exit command
     if components[0] == "ifexit":
         if components[1] == "a":
@@ -326,7 +239,18 @@ while True:
         else:                     
             print(f"___ERROR___ line: {pc} instruction: {instruction} | invaled operator: {components[2]} \n")
             break
-          
-   
+       
+    if components[0] == "function":
+        if components[1] in commands:
+            print(f"___ERROR___ line: {pc}, name of function must be differant then a prexsiting command, {commands}")
+        else:
+            userFunctions[components[1]] = UserFunction(components[1],components[2],components[3],components[4])
     
+    if components[0] in userFunctions:
+        lx = int(userFunctions[components[0]].ReturnTo)
+        endPc = int(userFunctions[components[0]].EndPc)
+        pc = int(userFunctions[components[0]].StartPc)   
+          
+    
+
     pc = int(pc) + 1
