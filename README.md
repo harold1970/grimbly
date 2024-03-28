@@ -17,8 +17,8 @@ The interpreter recognizes several commands, each with specific functionalities.
 * jmp: Conditional branching based on comparison.
 * mov: move a value from one varible to athother.
 # Variables: 
-*   The interpreter supports the use of variables to store and manipulate values. users can create variables with the *'ld'* command
-
+*   The interpreter supports the use of variables to store and manipulate values. users can create variables with the *'ld'* command.
+*   The interpreter also supports the use of the *'mov'* command to transer values between variables.
 # Script Loading:
 
 *    The interpreter loads the script from a .grimbly file specified as script.
