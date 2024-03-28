@@ -15,7 +15,7 @@ The interpreter recognizes several commands, each with specific functionalities.
 * ld: Load a value into a variable.
 * scan: Prompt the user for input.
 * jmp: Conditional branching based on comparison.
-
+* mov: move a value from one varible to athother.
 # Variables: 
 *   The interpreter supports the use of variables to store and manipulate values. users can create variables with the *'ld'* command
 
@@ -57,7 +57,8 @@ The interpreter recognizes several commands, each with specific functionalities.
 *    exit: Usage: exit
 *    ld: Usage: ld|*type(*"char"* or *"int"* )*|*variable*|*value*
 *    scan: Usage: scan|*type*|*varible to store in*|*prompt_message*
-*    /: Usage: /|*comment*  
+*    /: Usage: /|*comment*
+*    mov: Usage: mov|*varible to store*|*trasfer varible*
 # Compiling
 in the code editor there is a button 'compile' if you press that the text in the top will be compiled into a .grimbly script, when you save it will save the compiled code. 
 # Decompiling
